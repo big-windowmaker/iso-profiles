@@ -18,6 +18,10 @@ wmshutdown
 wmudmount
 wmusic
 
+# Firewall: ligado no sistema instalado (desktop-overlay/etc/ufw),
+# negando entradas exceto Samba (CIFS) e mDNS.
+ufw
+
 # Window Maker session services
 arandr
 picom
