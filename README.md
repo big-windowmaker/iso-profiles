@@ -39,7 +39,7 @@ shared/
 └── grub-i18n/               po/ + LINGUAS + update-translations.sh
 
 bigcommunity/
-└── kde/  gnome/  xfce/  cinnamon/  cosmic/  deepin/  hyprland/  core/
+└── kde/  gnome/  xfce/  cinnamon/  wmaker/  cosmic/  deepin/  hyprland/  core/
     ├── Packages-Desktop     the ONLY package file the edition owns
     ├── profile.conf         hostname, live user, custom_boot_args
     ├── Desktop-remove       (optional) removals from the desktop list
