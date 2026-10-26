@@ -17,6 +17,14 @@ wmmoonclock
 wmshutdown
 wmudmount
 wmusic
+# Opções extras (Aparência > Dockapps)
+wmcube
+pclock
+wmwifi
+wmapmload
+minidock
+minicontrol
+mountapp
 
 # Firewall: ligado no sistema instalado (desktop-overlay/etc/ufw),
 # negando entradas exceto Samba (CIFS) e mDNS.
@@ -30,6 +38,11 @@ rofi
 snixembed
 xss-lock
 i3lock
+# Janelas GTK 3/4 e libadwaita com a decoração do Window Maker
+gtk-nocsd
+# shared/desktop-overlay/etc/pam.d (sudo, polkit-1) usa pam_fprintd: sem o
+# fprintd cada sudo/pkexec registrava "PAM adding faulty module".
+fprintd
 
 # Applications
 catfish
