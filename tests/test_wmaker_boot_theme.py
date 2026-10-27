@@ -76,6 +76,7 @@ def test_installed_system_selects_the_big_wm_themes() -> None:
     dropin = (WMAKER / "root-overlay/etc/default/grub.d/big-wm-theme.cfg").read_text(encoding="utf-8")
     assert 'GRUB_THEME="/boot/grub/themes/big-wm/theme.txt"' in dropin
     assert re.search(r'^GRUB_GFXMODE="1024x768,800x600,auto"$', dropin, re.MULTILINE)
+    assert re.search(r'^GRUB_DISTRIBUTOR="Big WindowMaker"$', dropin, re.MULTILINE)
     plymouth = (WMAKER / "root-overlay/etc/plymouth/plymouthd.conf").read_text(encoding="utf-8")
     assert re.search(r"^Theme=big-wm$", plymouth, re.MULTILINE)
 
