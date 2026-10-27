@@ -1,1 +1,4 @@
 vi
+# O tema do Plymouth da edição é o big-wm (root-overlay/etc/plymouth); o
+# plymouth-theme-community o trocaria de volta a cada atualização dele.
+plymouth-theme-community
