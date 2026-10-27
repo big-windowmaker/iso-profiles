@@ -46,7 +46,7 @@ def test_live_theme_fonts_and_assets() -> None:
     theme = THEME.joinpath("theme.txt").read_text(encoding="utf-8")
     profile = (LIVE_GRUB / "cfg/profile.cfg").read_text(encoding="utf-8")
     assert "Big WindowMaker Live" in theme
-    assert not re.search(r"@(?!KEYMAP_SHORT@|TIMEOUT_NOTIFICATION_LONG@)[A-Z_]+@", theme)
+    assert not re.search(r"@(?!KEYMAP_SHORT@|TIMEOUT_NOTIFICATION_MIDDLE@)[A-Z_]+@", theme)
 
     loop = re.search(r"for font in (?P<names>[^;]+);", profile)
     assert loop is not None
@@ -75,6 +75,7 @@ def test_live_theme_fonts_and_assets() -> None:
 def test_installed_system_selects_the_big_wm_themes() -> None:
     dropin = (WMAKER / "root-overlay/etc/default/grub.d/big-wm-theme.cfg").read_text(encoding="utf-8")
     assert 'GRUB_THEME="/boot/grub/themes/big-wm/theme.txt"' in dropin
+    assert re.search(r'^GRUB_GFXMODE="1024x768,800x600,auto"$', dropin, re.MULTILINE)
     plymouth = (WMAKER / "root-overlay/etc/plymouth/plymouthd.conf").read_text(encoding="utf-8")
     assert re.search(r"^Theme=big-wm$", plymouth, re.MULTILINE)
 
