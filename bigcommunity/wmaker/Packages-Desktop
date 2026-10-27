@@ -127,14 +127,12 @@ automake
 # Display Manager
 lightdm
 lightdm-slick-greeter
-# Opcional: wdm (WINGs Display Manager), tela de login no visual NeXT com
-# sessões X11 e Wayland (big-windowmaker/packages, diretório wdm/). Fica
-# instalado e desativado: o padrão continua o LightDM (displaymanager em
-# profile.conf), que faz o autologin da sessão live. Para usar no sistema
-# instalado: systemctl disable lightdm && systemctl enable wdm (voltar:
-# systemctl enable --force lightdm). Descomentar quando o pacote estiver no
-# repositório do Big WindowMaker.
-#wdm
+# Tela de login do sistema instalado: wdm (WINGs Display Manager), no visual
+# NeXT, com as sessões X11 e Wayland. O LightDM continua na ISO só para o
+# autologin da sessão live (displaymanager em profile.conf); na instalação, o
+# Calamares (biglinux-livecd) habilita o wdm antes dele. Para voltar ao
+# LightDM no sistema instalado: systemctl enable --force lightdm.
+wdm
 
 # Fonts
 >extra noto-fonts-emoji
