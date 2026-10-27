@@ -29,7 +29,9 @@ def test_live_menu_keeps_every_shared_cfg() -> None:
     shared = {p.name for p in SHARED_CFG.glob("*.cfg")}
     edition = {p.name for p in (LIVE_GRUB / "cfg").glob("*.cfg")}
     assert edition == shared | {"profile.cfg"}
-    for name in shared:
+    # kernels.cfg é gerado do shared com a entrada 1 dizendo "Big WindowMaker"
+    # (grub-i18n/gerar.sh; conferido em test_wmaker_grub_nome.py).
+    for name in shared - {"kernels.cfg"}:
         link = LIVE_GRUB / "cfg" / name
         assert link.is_symlink(), name
         assert link.resolve() == (SHARED_CFG / name).resolve(), name
