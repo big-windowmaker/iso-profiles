@@ -2,6 +2,8 @@
 big-wm-session
 big-wm-themes
 big-wm-wayland
+# Dock horizontal com abas (estilo OPENSTEP 4.0 beta), nas duas sessões
+big-wm-tabbed-dock
 # Telas de boot no estilo do Window Maker: escolhidas por
 # root-overlay/etc/default/grub.d/big-wm-theme.cfg e
 # root-overlay/etc/plymouth/plymouthd.conf
