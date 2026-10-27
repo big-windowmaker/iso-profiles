@@ -6,6 +6,9 @@ big-wm-wayland
 big-wm-tabbed-dock
 # Aparência retrô: QTStep (Qt/Kvantum), OneStepBack (GTK), Netscape 4 (Firefox)
 qtstep-kvantum
+# Kvantum também nos aplicativos Qt 5 (antes vinha só como dependência do
+# sync-gnome-theme-to-qt)
+kvantum-qt5
 onestepback-gtk-theme
 retrothemes-firefox
 # Telas de boot no estilo do Window Maker: escolhidas por
