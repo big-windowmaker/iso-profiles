@@ -89,8 +89,9 @@ bigocrpdf
 bigrecorder
 xdg-terminal-exec
 
-# Browsers
-brave-browser
+# Browsers (Firefox com o tema Netscape 4 da sessão Big WindowMaker)
+firefox
+firefox-i18n-pt-br
 
 # Development Tools
 autoconf
