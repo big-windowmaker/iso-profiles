@@ -32,6 +32,22 @@ wmapmload
 minidock
 minicontrol
 mountapp
+# Mais dockapps clássicos (big-dockapps): Aparência > Dockapps
+wmcalc
+wmcalclock
+wmcliphist
+wmclockmon
+wmcpufreq
+wmfsm
+wmglobe
+wmgtemp
+wmmon
+wmpager
+wmsun
+wmtime
+wmtop
+wmtz
+wmweather
 
 # Firewall: ligado no sistema instalado (desktop-overlay/etc/ufw),
 # negando entradas exceto Samba (CIFS) e mDNS.
