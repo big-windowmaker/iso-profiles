@@ -200,6 +200,10 @@ libappindicator
 7zip
 perl-file-mimeinfo
 pipewire-biglinux-config
+# Prioridade de tempo real para o PipeWire/WirePlumber e o portal: sem ele o
+# journal registra "RTKit error: org.freedesktop.DBus.Error.ServiceUnknown"
+# a cada login (VM instalada, 26/10).
+rtkit
 powertop
 python-pysmbc
 unarchiver
