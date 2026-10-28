@@ -1,0 +1,5 @@
+# Big WindowMaker: inicia o ModemManager quando um possível modem aparece
+# (o boot o pula sem modem; ver ModemManager.service.d/bigwm-sob-demanda.conf).
+ACTION=="add", SUBSYSTEM=="tty", KERNEL=="ttyUSB*|ttyACM*", TAG+="systemd", ENV{SYSTEMD_WANTS}+="ModemManager.service"
+ACTION=="add", SUBSYSTEM=="usbmisc", KERNEL=="cdc-wdm*", TAG+="systemd", ENV{SYSTEMD_WANTS}+="ModemManager.service"
+ACTION=="add", SUBSYSTEM=="wwan", TAG+="systemd", ENV{SYSTEMD_WANTS}+="ModemManager.service"
