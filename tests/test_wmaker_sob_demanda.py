@@ -37,11 +37,18 @@ def test_render_menu_options_nao_segura_o_login():
     assert "Nice=19" in conf and "IOSchedulingClass=idle" in conf
 
 
+def test_snapshot_detect_so_em_boot_por_snapshot():
+    conf = _linhas(OV / "etc" / "systemd" / "user" / "biglinux-snapshot-detect.service.d" / "bigwm-so-em-snapshot.conf")
+    # O mesmo teste do aplicativo (biglinux-snapshot-restore.py, is_in_snapshot).
+    assert "ExecCondition=/bin/sh -c 'grep -q timeshift-btrfs/snapshots /proc/cmdline'" in conf
+
+
 def test_nada_no_shared():
     # Os arquivos novos são da edição: nenhum caminho passa pelo shared/
     # (o desktop-overlay/usr da edição é link para o shared/).
     shared = (ROOT / "shared").resolve()
     for p in [SYS / "ModemManager.service.d",
               OV / "etc" / "udev" / "rules.d" / "90-bigwm-modemmanager.rules",
-              OV / "etc" / "systemd" / "user" / "render-menu-options-user.service.d"]:
+              OV / "etc" / "systemd" / "user" / "render-menu-options-user.service.d",
+              OV / "etc" / "systemd" / "user" / "biglinux-snapshot-detect.service.d"]:
         assert shared not in p.resolve().parents, p
