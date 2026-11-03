@@ -1,5 +1,8 @@
 # Big WindowMaker
 big-wm-session
+# Nome do sistema: "Big WindowMaker, based on BigLinux" no os-release, no
+# lsb-release e no /etc/issue (no lugar do bigcommunity-name, em Root-remove).
+big-wm-name
 big-wm-themes
 big-wm-wayland
 # Dock horizontal com abas (estilo OPENSTEP 4.0 beta), nas duas sessões
