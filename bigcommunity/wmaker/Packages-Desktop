@@ -58,6 +58,7 @@ wmtime
 wmtop
 wmtz
 wmweather
+wmeyes
 
 # Firewall: ligado no sistema instalado (desktop-overlay/etc/ufw),
 # negando entradas exceto Samba (CIFS) e mDNS.
