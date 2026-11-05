@@ -7,8 +7,8 @@ big-wm-themes
 big-wm-wayland
 # Dock horizontal com abas (estilo OPENSTEP 4.0 beta), nas duas sessões
 big-wm-tabbed-dock
-# Zonas de encaixe e mosaico de janelas (wmake-zones), desligado até o
-# usuário ligar: Áreas de trabalho > Organização de janelas
+# Zonas de encaixe e mosaico de janelas (wmake-zones): as zonas vêm ligadas
+# (0.3), o mosaico desligado; o ladrilho no Dock alterna os dois
 wmake-zones
 # Aparência retrô: QTStep (Qt/Kvantum), OneStepBack (GTK), Netscape 4 (Firefox)
 qtstep-kvantum
