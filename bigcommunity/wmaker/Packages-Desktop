@@ -74,6 +74,12 @@ polkit-gnome
 rofi
 snixembed
 xss-lock
+# Tela de bloqueio OPENSTEP: módulos do xsecurelock (X11) e layout do
+# gtklock (Wayland); o PAM fica com eles. O i3lock e o swaylock ficam como
+# reserva do big-wm-lock.
+big-wm-lockscreen
+xsecurelock
+gtklock
 i3lock
 # Janelas GTK 3/4 e libadwaita com a decoração do Window Maker
 gtk-nocsd
