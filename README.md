@@ -120,3 +120,11 @@ is never read, which is why this repository does not ship one.
 In `Packages-*`, `>extra`, `>multilib` and `>i686` are manjaro-tools target
 markers, and `KERNEL` is a placeholder, not a package: `buildiso -k linux612`
 expands `KERNEL-broadcom-wl` into `linux612-broadcom-wl`. Leave it as `KERNEL`.
+
+## Credits
+
+Big WindowMaker development:
+
+- **Rafael Ruscher** — <rruscher@gmail.com.br>
+- **Barnabé Di Kartola** — <barnabedikartola@gmail.com>
+
