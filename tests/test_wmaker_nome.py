@@ -1,8 +1,8 @@
 """Edição wmaker: o sistema se apresenta como Big WindowMaker, baseado no BigLinux.
 
 O nome vem do pacote big-wm-name (os-release, lsb-release, /etc/issue), no
-lugar do bigcommunity-name; o instalador usa o perfil bigwm do
-biglinux-livecd, escolhido pelo marcador da imagem.
+lugar do bigcommunity-name; o instalador usa o perfil bigwindowmaker do
+biglinux-livecd (identidade própria), escolhido pelo marcador da imagem.
 """
 import re
 from pathlib import Path
@@ -27,7 +27,7 @@ def test_big_wm_name_replaces_bigcommunity_name():
 def test_installer_profile_marker():
     marker = WMAKER / "live-overlay" / "etc" / "biglinux-livecd" / "profile"
     assert not marker.is_symlink()
-    assert marker.read_text(encoding="utf-8") == "bigwm\n"
+    assert marker.read_text(encoding="utf-8") == "bigwindowmaker\n"
     # resolve-profile recusa marcador gravável por outros.
     assert marker.stat().st_mode & 0o022 == 0
 
