@@ -125,6 +125,6 @@ expands `KERNEL-broadcom-wl` into `linux612-broadcom-wl`. Leave it as `KERNEL`.
 
 Big WindowMaker development:
 
-- **Rafael Ruscher** — <rruscher@gmail.com.br>
+- **Rafael Ruscher** — <rruscher@gmail.com>
 - **Barnabé Di Kartola** — <barnabedikartola@gmail.com>
 
