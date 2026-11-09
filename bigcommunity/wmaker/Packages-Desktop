@@ -94,7 +94,8 @@ big-video-player
 exo
 gnome-calculator
 gnome-disk-utility
-guvcview
+# Webcam: BigCam (no lugar do guvcview)
+bigcam
 indicator-sound-switcher
 # Editor de texto (o único: o gedit saiu, era duplicado); o Thunar continua com as pastas (inode/directory
 # fixado em /etc/xdg/windowmaker-mimeapps.list e wlmaker-mimeapps.list)
