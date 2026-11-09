@@ -92,15 +92,11 @@ catfish
 big-audio-player
 big-video-player
 exo
-gedit
-gedit-plugins
 gnome-calculator
 gnome-disk-utility
-gnome-online-accounts-gtk
 guvcview
-guvcview-qt
 indicator-sound-switcher
-# Editor de texto do KDE; o Thunar continua com as pastas (inode/directory
+# Editor de texto (o único: o gedit saiu, era duplicado); o Thunar continua com as pastas (inode/directory
 # fixado em /etc/xdg/windowmaker-mimeapps.list e wlmaker-mimeapps.list)
 kate
 network-manager-applet
@@ -123,7 +119,9 @@ xfce4-taskmanager
 xarchiver
 
 # Apps BigLinux/Community
+ashypass
 ashyterm
+ashytv
 auto-tweaks-browser
 big-audio-converter
 big-hardware-info
@@ -131,8 +129,11 @@ big-network-info
 big-parental-controls
 big-video-converter
 biglinux-mime
+# Ajustes gerais (br.com.biglinux-settings)
+biglinux-settings
 big-system-config
 biglinux-webapps
+bignetscreen
 bigocrpdf
 bigrecorder
 xdg-terminal-exec
@@ -140,10 +141,6 @@ xdg-terminal-exec
 # Browsers (Firefox com o tema Netscape 4 da sessão Big WindowMaker)
 firefox
 firefox-i18n-pt-br
-
-# Development Tools
-autoconf
-automake
 
 # Display Manager
 lightdm
@@ -284,8 +281,10 @@ bigicons-papient
 breeze-icons
 qt6-svg
 
-# TTS
+# TTS e acessibilidade (o teclado na tela é o tópico Acessibilidade do
+# Boas-vindas na sessão X11)
 espeak-ng
+onboard
 orca
 speech-dispatcher
 tts-biglinux
@@ -331,7 +330,6 @@ manjaro-settings-samba
 # Xorg
 xorg-mkfontscale
 xorg-server
-xorg-twm
 xorg-xinit
 xorg-xkill
 
