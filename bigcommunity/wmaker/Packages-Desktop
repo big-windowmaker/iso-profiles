@@ -67,8 +67,8 @@ wmeyes
 # negando entradas exceto Samba (CIFS) e mDNS.
 ufw
 
-# Window Maker session services
-arandr
+# Window Maker session services (Monitores: o big-wm-display-resolution, que
+# vem com o big-wm-session nas duas sessões; ARandR e wdisplays saíram)
 picom
 polkit-gnome
 rofi
