@@ -29,6 +29,8 @@ wlmaker
 wmclock
 wmcpuload
 wmix
+# Volume padrão do Dock (saída e microfone, PulseAudio/PipeWire)
+wmpulsemixer
 wmmemload
 wmnet
 wmsystemtray
