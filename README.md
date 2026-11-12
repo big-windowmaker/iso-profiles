@@ -1,4 +1,116 @@
 <p align="center">
+  <img src="https://raw.githubusercontent.com/big-windowmaker/big-wm/main/themes/logo/big-wm.svg" width="110" alt="Logo do Big WindowMaker">
+</p>
+
+<h1 align="center">iso-profiles — edição Big WindowMaker</h1>
+
+<p align="center">
+  <b>O perfil da ISO do Big WindowMaker (<code>bigcommunity/wmaker</code>).</b><br>
+  Fork de <a href="https://github.com/big-comm/iso-profiles">big-comm/iso-profiles</a>, os perfis das edições da BigCommunity.
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/edi%C3%A7%C3%A3o-bigcommunity%2Fwmaker-2d85c6" alt="Edição bigcommunity/wmaker">
+  <a href="https://github.com/big-comm/iso-profiles"><img src="https://img.shields.io/badge/upstream-BigCommunity-2d85c6" alt="Upstream: BigCommunity"></a>
+  <img src="https://img.shields.io/badge/ISO-Alpha-8a2be2" alt="ISO Alpha">
+</p>
+
+<p align="center">
+  <a href="#a-edição-big-windowmaker">A edição</a> ·
+  <a href="#da-lista-de-pacotes-à-iso">Como vira ISO</a> ·
+  <a href="#capturas-da-iso">Capturas</a> ·
+  <a href="#testar">Testar</a> ·
+  <a href="#contribuir">Contribuir</a> ·
+  <a href="#créditos">Créditos</a> ·
+  <a href="#bigcommunity-iso-profiles">Documentação original (English)</a>
+</p>
+
+## A edição Big WindowMaker
+
+`bigcommunity/wmaker/` descreve a ISO do Big WindowMaker: o desktop
+Window Maker (X11) e wlmaker (Wayland) do
+[big-wm](https://github.com/big-windowmaker/big-wm) sobre a base BigLinux /
+BigCommunity / Manjaro.
+
+| Arquivo | O que define |
+|---|---|
+| `bigcommunity/wmaker/Packages-Desktop` | os pacotes da edição: sessões, Window Maker, wlmaker, dockapps, temas, aplicativos |
+| `bigcommunity/wmaker/profile.conf` | nome da máquina, usuário live, argumentos de boot |
+| `bigcommunity/wmaker/Desktop-remove`, `Root-remove` | o que a edição tira das listas comuns |
+| `bigcommunity/wmaker/*-overlay/` | arquivos da edição (os demais são links para `shared/`) |
+
+> **Atenção:** quase tudo em `bigcommunity/wmaker/` que não é
+> `Packages-Desktop` ou `profile.conf` é **link simbólico para `shared/`**.
+> Mudar o destino muda **todas as edições**. Confira com `ls -l` antes de
+> gravar e, para algo só do Big WindowMaker, use os arquivos da edição.
+
+## Da lista de pacotes à ISO
+
+```mermaid
+flowchart LR
+  A[big-wm, tabbed-dock,<br/>display-resolution, wmake-zones] -->|CI: pacotes| C[build-iso]
+  B[packages<br/>Window Maker, wlmaker, dockapps] -->|CI: pacotes| C
+  P[iso-profiles<br/>bigcommunity/wmaker] -->|perfil| C
+  L[biglinux-livecd<br/>sessão live e instalador] -->|pacote| B
+  C -->|buildiso + testes em VM| ISO[(ISO do Big WindowMaker)]
+```
+
+O [build-iso](https://github.com/big-windowmaker/build-iso) junta os pacotes
+dos outros repositórios num repositório local, lê este perfil e gera a ISO;
+depois a inicia em máquinas virtuais (BIOS e UEFI) até a sessão live e testa
+a instalação pelo Calamares.
+
+## Capturas da ISO
+
+ISO de teste (Alpha), máquina virtual, 06/11/2026:
+
+| | |
+|---|---|
+| ![Menu do GRUB da ISO com o tema do Big WindowMaker](https://raw.githubusercontent.com/big-windowmaker/.github/main/profile/images/iso-grub.png) | ![Sessão live do Big WindowMaker](https://raw.githubusercontent.com/big-windowmaker/.github/main/profile/images/iso-sessao-live.png) |
+| GRUB da ISO | Sessão live |
+| ![Tela de login com a escolha da sessão X11 ou Wayland](https://raw.githubusercontent.com/big-windowmaker/.github/main/profile/images/iso-login-sessao.png) | ![Sistema instalado na sessão Wayland](https://raw.githubusercontent.com/big-windowmaker/.github/main/profile/images/iso-instalado-wayland.png) |
+| Login: X11 ou Wayland | Sistema instalado, sessão Wayland |
+
+## Testar
+
+```sh
+python -m pytest tests     # contratos do GRUB, nome da edição, login live, pacman.conf, tema
+```
+
+Os testes também rodam no build-iso antes de cada ISO.
+
+## Contribuir
+
+- Pacote novo só no Big WindowMaker: `bigcommunity/wmaker/Packages-Desktop`
+  (confira o nome com `pacman -Si`).
+- Mudança que vale para todas as edições: proponha ao
+  [projeto original](https://github.com/big-comm/iso-profiles).
+- Problemas da ISO: [build-iso](https://github.com/big-windowmaker/build-iso/issues);
+  guia: [CONTRIBUTING](https://github.com/big-windowmaker/.github/blob/main/CONTRIBUTING.md).
+
+## Créditos
+
+**Projeto original — BigCommunity:** Tales A. Mendonça
+([@talesam](https://github.com/talesam)),
+[@narayanls](https://github.com/narayanls),
+[@leoberbert](https://github.com/leoberbert) e a comunidade BigCommunity.
+
+**Mantenedores do Big WindowMaker:** Rafael Ruscher <rruscher@gmail.com> e
+Barnabé Di Kartola <barnabedikartola@gmail.com>.
+
+**Agradecimentos especiais:** Alfredo Kojima (pelo
+[Window Maker](https://www.windowmaker.org/)), Philipp Kaeser (pelo
+[wlmaker](https://github.com/phkaeser/wlmaker)), Bruno Gonçalves (pelo
+[BigLinux](https://www.biglinux.com.br/)) e Tales A. Mendonça (pela
+[BigCommunity](https://communitybig.org)).
+
+**Licença:** o projeto original não declara licença, e este fork não pode
+licenciar os arquivos dele. As contribuições do Big WindowMaker seguem a
+licença que o projeto original adotar.
+
+---
+
+<p align="center">
   <img src="docs/images/header.webp" width="540" alt="header">
 </p>
 
