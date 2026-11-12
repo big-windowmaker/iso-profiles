@@ -7,6 +7,8 @@ big-wm-themes
 big-wm-wayland
 # Dock horizontal com abas (estilo OPENSTEP 4.0 beta), nas duas sessões
 big-wm-tabbed-dock
+# Monitores (Configurações > Monitores), nas duas sessões
+big-wm-display-resolution
 # Zonas de encaixe e mosaico de janelas (wmake-zones): as zonas vêm ligadas
 # (0.3), o mosaico desligado; o ladrilho no Dock alterna os dois
 wmake-zones
