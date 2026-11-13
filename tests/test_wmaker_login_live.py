@@ -1,29 +1,32 @@
-"""The live session's login screen looks like Big WindowMaker, not GNOME.
+"""The live session logs in through wdm, as the installed system does.
 
-The live session logs in by itself (LightDM autologin into "livecd"); the
-greeter shows when the user leaves the session. manjaro-tools rewrites
-/etc/lightdm/slick-greeter.conf in the desktop image with the BigCommunity
-background (/usr/share/backgrounds/community/lightdm-default.jpg, which this
-edition does not ship: the greeter came up black, with the default dark GTK
-look) and keeps ours as slick-greeter.conf.bak. The live overlay sits above
-that image at boot, so the greeter configuration lives there, next to the
-autologin.
+Big WindowMaker's ISO uses wdm (WINGs Display Manager) as its login screen:
+profile.conf names it (manjaro-tools enables wdm.service in the image) and the
+live user is bigwindowmaker, password big. wdm has no automatic login: the
+screen preselects the user (user list) and the live session "Big WindowMaker
+Live" (startbiglive: setup assistant, then the desktop), and its help (F1)
+shows the credentials. The live overlay holds the live-only wdm configuration;
+the installed system keeps the one of the wdm package.
 """
 
 from __future__ import annotations
 
 import configparser
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 WMAKER = ROOT / "bigcommunity/wmaker"
-LIGHTDM = WMAKER / "live-overlay/etc/lightdm"
+LIVE = WMAKER / "live-overlay"
 
 
-def _ini(path: Path) -> configparser.ConfigParser:
-    parser = configparser.ConfigParser(interpolation=None)
-    parser.read_string(path.read_text(encoding="utf-8"))
-    return parser
+def _profile() -> dict[str, str]:
+    values = {}
+    for line in (WMAKER / "profile.conf").read_text(encoding="utf-8").splitlines():
+        m = re.match(r'^([a-z_]+)="?([^"]*)"?$', line.strip())
+        if m:
+            values[m.group(1)] = m.group(2)
+    return values
 
 
 def _packages(path: Path) -> set[str]:
@@ -35,33 +38,56 @@ def _packages(path: Path) -> set[str]:
     return names
 
 
-def test_live_autologin_is_kept() -> None:
-    seat = _ini(LIGHTDM / "lightdm.conf")["Seat:*"]
-    assert seat["autologin-user"] == "community"
-    assert seat["autologin-session"] == "livecd"
-    assert seat["autologin-user-timeout"] == "0"
+def _resources(path: Path) -> dict[str, str]:
+    res = {}
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if line.startswith("!") or ":" not in line:
+            continue
+        key, value = line.split(":", 1)
+        res[key.strip()] = value.strip()
+    return res
 
 
-def test_live_greeter_is_slick_with_the_big_wm_session() -> None:
-    seat = _ini(LIGHTDM / "lightdm.conf")["Seat:*"]
-    assert seat["greeter-session"] == "lightdm-slick-greeter"
-    # The X11 session of the edition (big-wm.desktop), preselected.
-    assert seat["user-session"] == "big-wm"
+def test_live_login_is_wdm_with_the_live_user() -> None:
+    profile = _profile()
+    assert profile["displaymanager"] == "wdm"
+    assert profile["username"] == "bigwindowmaker"
+    assert profile["password"] == "big"
+    # LightDM stays installed (Calamares' displaymanager module needs one it
+    # knows) but is not the live login any more.
+    assert {"wdm", "lightdm"} <= _packages(WMAKER / "Packages-Desktop")
+    assert not (LIVE / "etc/lightdm").exists()
 
 
-def test_live_greeter_has_the_big_wm_look() -> None:
-    greeter = _ini(LIGHTDM / "slick-greeter.conf")["Greeter"]
-    assert greeter["background"] == "/usr/share/backgrounds/big-wm/default.jpg"
-    assert "community" not in greeter["background"]
-    assert greeter["theme-name"] == "OneStepBack"
-    assert greeter["draw-user-backgrounds"] == "false"
-    # A PNG of a fixed size: slick-greeter draws the logo at its own size
-    # (the scalable SVG covered a third of the screen).
-    assert greeter["logo"].endswith("/apps/big-wm.png")
-    assert "/64x64/" in greeter["logo"]
+def test_live_wdm_preselects_the_live_session_and_shows_the_credentials() -> None:
+    res = _resources(LIVE / "etc/wdm/wdm-config")
+    assert res["DisplayManager*wdmDefaultSession"] == "x11/big-wm-live"
+    assert res["DisplayManager*wdmUserList"] == "true"
+    help_file = res["DisplayManager*wdmHelpFile"]
+    assert help_file == "/etc/wdm/live-help.txt"
+    text = (LIVE / help_file.lstrip("/")).read_text(encoding="utf-8")
+    assert "bigwindowmaker" in text and "big" in text
+    # The rest is the wdm package's: sessions from the .desktop files,
+    # Wayland sessions, the session the user chose last.
+    for key in ("wdmXSessionDirs", "wdmWaylandSessionDirs", "wdmWaylandSession",
+                "wdmSessionStateDir", "wdmLogin", "session"):
+        assert res[f"DisplayManager*{key}"], key
 
 
-def test_greeter_assets_come_from_the_edition_packages() -> None:
-    packages = _packages(WMAKER / "Packages-Desktop")
-    # big-wm-themes: wallpaper and logo; onestepback-gtk-theme: GTK theme.
-    assert {"big-wm-themes", "onestepback-gtk-theme", "lightdm", "lightdm-slick-greeter"} <= packages
+def test_the_live_session_runs_the_assistant_and_is_listed() -> None:
+    desktop = configparser.ConfigParser(interpolation=None)
+    desktop.optionxform = str
+    desktop.read_string((LIVE / "usr/share/xsessions/big-wm-live.desktop").read_text(encoding="utf-8"))
+    entry = desktop["Desktop Entry"]
+    assert entry["Exec"] == "/usr/bin/startbiglive"
+    # wdm hides a session whose TryExec is missing (the generic livecd.desktop
+    # of biglinux-livecd asks for startplasma-x11, absent in this edition).
+    assert entry["TryExec"] == "/usr/bin/startbiglive"
+
+
+def test_no_old_live_user_left_in_the_edition() -> None:
+    for path in WMAKER.rglob("*"):
+        if path.is_symlink() or not path.is_file() or path.suffix in {".mo", ".png", ".jpg", ".pf2", ".bin"}:
+            continue
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        assert not re.search(r"\b(autologin-user|username|AutomaticLogin)=\"?community\b", text), path

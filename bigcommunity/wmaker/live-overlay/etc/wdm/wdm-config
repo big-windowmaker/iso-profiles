@@ -1,0 +1,59 @@
+! Configuração do wdm SÓ na sessão live (live-overlay): é a do pacote wdm
+! (packages/wdm/wdm-config) com a sessão padrão e a ajuda da sessão live.
+! O sistema instalado usa a do pacote.
+! Configuração do wdm (WINGs Display Manager) para o Big WindowMaker.
+! Recursos no formato do xdm; ver wdm(1) e xdm(1).
+!
+! Registro: syslog (journalctl -u wdm). Para depurar, troque debugLevel por 4.
+DisplayManager.servers:		/etc/wdm/Xservers
+DisplayManager.useSyslog:	true
+DisplayManager.syslogFacility:	LOG_AUTHPRIV
+DisplayManager.debugLevel:	2
+DisplayManager.pidFile:		/run/wdm.pid
+DisplayManager.authDir:		/var/lib/wdm
+DisplayManager.accessFile:	/etc/wdm/Xaccess
+! Sem XDMCP: o wdm só gerencia o servidor X local.
+DisplayManager.requestPort:	0
+! Idioma da tela de login e das sessões: o do sistema (/etc/locale.conf,
+! que o systemd passa ao serviço).
+DisplayManager.exportList:	LANG LANGUAGE LC_MESSAGES TZ
+DisplayManager._0.authorize:	true
+DisplayManager*resources:	/etc/wdm/Xresources
+DisplayManager*setup:		/etc/wdm/Xsetup_0
+DisplayManager*startup:		/etc/wdm/Xstartup
+DisplayManager*reset:		/etc/wdm/Xreset
+DisplayManager*session:		/etc/wdm/Xsession
+DisplayManager*userPath:	/usr/local/sbin:/usr/local/bin:/usr/bin
+DisplayManager*systemPath:	/usr/local/sbin:/usr/local/bin:/usr/bin
+! Um servidor X novo a cada sessão (como o LightDM).
+DisplayManager*terminateServer:	true
+!
+! Tela de login (wdmLogin)
+DisplayManager*wdmLogin:	/usr/bin/wdmLogin
+DisplayManager*wdmLoginConfig:	/etc/wdm/wdmLogin-config
+DisplayManager*wdmLogo:		/usr/share/icons/hicolor/128x128/apps/big-wm.png
+DisplayManager*wdmBg:		pixmap:/usr/share/backgrounds/big-wm/default.jpg
+DisplayManager*wdmAnimations:	true
+! Usuário escolhido numa lista (contas com UID entre UID_MIN e UID_MAX do
+! /etc/login.defs, shell do /etc/shells, não bloqueadas); o último item,
+! "Outro...", abre o campo de texto (LDAP, contas ocultas). false = só o
+! campo de texto.
+DisplayManager*wdmUserList:	true
+! Reiniciar e desligar pela tela de login, sem senha (como no LightDM).
+DisplayManager*wdmReboot:	/usr/bin/systemctl reboot
+DisplayManager*wdmHalt:		/usr/bin/systemctl poweroff
+DisplayManager*wdmVerify:	false
+DisplayManager*wdmRoot:		false
+!
+! Sessões: wdmWm vazio = lista dos .desktop de xsessions e wayland-sessions.
+! A sessão escolhida por cada usuário fica em wdmSessionStateDir.
+DisplayManager*wdmWm:
+! Sessão live: o assistente (idioma, teclado, tema) e depois o Big
+! WindowMaker; a ajuda (F1) mostra o usuário e a senha da sessão live.
+DisplayManager*wdmDefaultSession:	x11/big-wm-live
+DisplayManager*wdmHelpFile:	/etc/wdm/live-help.txt
+DisplayManager*wdmXSessionDirs:		/usr/local/share/xsessions:/usr/share/xsessions
+DisplayManager*wdmWaylandSessionDirs:	/usr/local/share/wayland-sessions:/usr/share/wayland-sessions
+DisplayManager*wdmWaylandSession:	/etc/wdm/Wsession
+DisplayManager*wdmSessionStateDir:	/var/lib/wdm/sessions
+DisplayManager*wdmRunDir:		/run/wdm

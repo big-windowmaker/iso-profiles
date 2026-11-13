@@ -148,14 +148,15 @@ firefox
 firefox-i18n-pt-br
 
 # Display Manager
+# Tela de login da sessão live e do sistema instalado: wdm (WINGs Display
+# Manager), no visual NeXT, com as sessões X11 e Wayland (displaymanager em
+# profile.conf; na instalação, o Calamares, biglinux-livecd, habilita o wdm).
+# O LightDM fica instalado e desabilitado: o módulo displaymanager do
+# Calamares o configura, e para voltar a ele no sistema instalado basta
+# systemctl enable --force lightdm.
+wdm
 lightdm
 lightdm-slick-greeter
-# Tela de login do sistema instalado: wdm (WINGs Display Manager), no visual
-# NeXT, com as sessões X11 e Wayland. O LightDM continua na ISO só para o
-# autologin da sessão live (displaymanager em profile.conf); na instalação, o
-# Calamares (biglinux-livecd) habilita o wdm antes dele. Para voltar ao
-# LightDM no sistema instalado: systemctl enable --force lightdm.
-wdm
 
 # Fonts
 >extra noto-fonts-emoji

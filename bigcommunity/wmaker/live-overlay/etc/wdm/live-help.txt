@@ -1,0 +1,15 @@
+Sessão live do Big WindowMaker
+Big WindowMaker live session
+
+Usuário / User:   bigwindowmaker
+Senha / Password: big
+
+"Big WindowMaker Live" abre o assistente (idioma, teclado, tema) e
+depois a área de trabalho. Para instalar, use "Install System".
+"Big WindowMaker Live" opens the setup assistant (language, keyboard,
+theme) and then the desktop. To install, use "Install System".
+
+A senha "big" vale só para a sessão live: o sistema instalado usa o
+usuário e a senha criados no instalador.
+The password "big" is only for the live session: the installed system
+uses the user and password created in the installer.
