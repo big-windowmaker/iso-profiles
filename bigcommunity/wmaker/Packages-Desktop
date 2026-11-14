@@ -113,7 +113,9 @@ playerctl
 # Print, Alt+Print e Shift+Print (big-wm-screenshot abre o Spectacle)
 spectacle
 sync-gnome-theme-to-qt
-thunar
+# Thunar da master do Xfce (repositório big-windowmaker/packages, com o
+# libxfce4ui 4.21 que ele pede); provides/conflicts thunar
+thunar-git
 thunar-archive-plugin
 thunar-media-tags-plugin
 thunar-shares-plugin
