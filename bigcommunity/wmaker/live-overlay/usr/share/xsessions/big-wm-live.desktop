@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Big WindowMaker Live
+Name[pt_BR]=Big WindowMaker Live
+Comment=Setup assistant of the live session, then Big WindowMaker (X11)
+Comment[pt_BR]=Assistente da sessão live e depois o Big WindowMaker (X11)
+Type=Application
+Exec=/usr/bin/startbiglive
+TryExec=/usr/bin/startbiglive
+DesktopNames=livecd
