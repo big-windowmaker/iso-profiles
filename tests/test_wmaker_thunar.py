@@ -27,3 +27,9 @@ def test_thunar_git_is_the_only_thunar() -> None:
     assert "thunar" not in names
     # plugins and thumbnails keep working on top of it
     assert {"thunar-archive-plugin", "thunar-volman", "tumbler"} <= names
+
+
+def test_tumbler_plugins_have_their_libraries() -> None:
+    # tumbler installs the ODF, EPUB and RAW plugins but they load only with
+    # these optional libraries (Beta 1: "not found" in ldd, no thumbnails)
+    assert {"libgsf", "libgepub", "libopenraw"} <= _names()
