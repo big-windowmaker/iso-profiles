@@ -144,6 +144,11 @@ thunar-shares-plugin
 thunar-volman
 thunarx-python
 tumbler
+# tumbler plugins that are installed but stay off without their library:
+# office documents (ODF), EPUB and camera RAW thumbnails in Thunar
+libgsf
+libgepub
+libopenraw
 xfce4-taskmanager
 xarchiver
 
